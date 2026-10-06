@@ -25,1911 +25,9 @@
           rel="stylesheet">
 
 
-    <style>
+    
+    <link rel="stylesheet" href="styles.css">
 
-    /* =====================================================
-       CONFIGURAÇÃO GERAL
-    ===================================================== */
-
-    * {
-        box-sizing: border-box;
-    }
-
-
-    html {
-        scroll-behavior: smooth;
-    }
-
-
-    body {
-
-        margin: 0;
-
-        background: #030506;
-
-        color: #d8d8d8;
-
-        font-family:
-            "IBM Plex Mono",
-            monospace;
-
-        overflow-x: hidden;
-    }
-
-
-    body::before {
-
-        content: "";
-
-        position: fixed;
-
-        inset: 0;
-
-        pointer-events: none;
-
-        z-index: 9998;
-
-        background:
-
-            repeating-linear-gradient(
-                0deg,
-                transparent 0px,
-                transparent 3px,
-                rgba(255,255,255,.025) 4px
-            );
-
-        opacity: .75;
-    }
-
-
-    body::after {
-
-        content: "";
-
-        position: fixed;
-
-        inset: 0;
-
-        pointer-events: none;
-
-        z-index: 9999;
-
-        background:
-
-            radial-gradient(
-                ellipse at center,
-                transparent 45%,
-                rgba(0,0,0,.45) 100%
-            );
-
-        mix-blend-mode: multiply;
-    }
-
-
-    /* =====================================================
-       CURSOR
-    ===================================================== */
-
-    body,
-    button,
-    input {
-
-        cursor: crosshair;
-    }
-
-
-    button,
-    a {
-
-        cursor: pointer;
-    }
-
-
-    /* =====================================================
-       TELA DE ACESSO
-    ===================================================== */
-
-    #accessScreen {
-
-        position: fixed;
-
-        inset: 0;
-
-        z-index: 5000;
-
-        display: flex;
-
-        align-items: center;
-
-        justify-content: center;
-
-        text-align: center;
-
-        overflow: hidden;
-
-        background:
-
-            linear-gradient(
-                rgba(0,0,0,.68),
-                rgba(0,0,0,.94)
-            ),
-
-            url("imagensScps/6666.png");
-
-        background-size: cover;
-
-        background-position: center;
-
-        animation:
-            backgroundPulse 12s ease-in-out infinite;
-
-        transition:
-
-            opacity 1.5s ease,
-            visibility 1.5s ease;
-    }
-
-
-    #accessScreen.hidden {
-
-        opacity: 0;
-
-        visibility: hidden;
-
-        pointer-events: none;
-    }
-
-
-    #accessScreen::before {
-
-        content: "";
-
-        position: absolute;
-
-        inset: -20%;
-
-        background:
-
-            radial-gradient(
-                ellipse at center,
-                transparent 15%,
-                rgba(0,0,0,.35) 55%,
-                rgba(0,0,0,.96) 100%
-            );
-
-        pointer-events: none;
-    }
-
-
-    #accessScreen::after {
-
-        content: "";
-
-        position: absolute;
-
-        inset: 0;
-
-        pointer-events: none;
-
-        background:
-
-            repeating-linear-gradient(
-                0deg,
-                transparent 0px,
-                transparent 3px,
-                rgba(255,255,255,.04) 4px
-            );
-
-        opacity: .8;
-    }
-
-
-    @keyframes backgroundPulse {
-
-        0%, 100% {
-
-            background-position:
-                center;
-
-            filter:
-                brightness(.65)
-                contrast(1.2);
-        }
-
-        50% {
-
-            background-position:
-                52% 48%;
-
-            filter:
-                brightness(.42)
-                contrast(1.4);
-        }
-    }
-
-
-    /* =====================================================
-       CONTEÚDO DA TELA INICIAL
-    ===================================================== */
-
-    .access-content {
-
-        position: relative;
-
-        z-index: 2;
-
-        width: min(900px, 90%);
-
-        padding: 40px;
-
-        animation:
-            terminalAppear 2s ease;
-    }
-
-
-    @keyframes terminalAppear {
-
-        from {
-
-            opacity: 0;
-
-            transform:
-                translateY(20px);
-
-            filter:
-                blur(8px);
-        }
-
-        to {
-
-            opacity: 1;
-
-            transform:
-                translateY(0);
-
-            filter:
-                blur(0);
-        }
-    }
-
-
-    .foundation {
-
-        font-family:
-            "Rajdhani",
-            sans-serif;
-
-        font-size:
-            clamp(40px, 8vw, 90px);
-
-        font-weight: 600;
-
-        letter-spacing:
-            .2em;
-
-        color:
-            #dedede;
-
-        text-shadow:
-
-            0 0 8px
-            rgba(255,255,255,.15),
-
-            0 0 40px
-            rgba(0,0,0,1);
-
-        animation:
-            textGlitch 8s infinite;
-    }
-
-
-    @keyframes textGlitch {
-
-        0%, 88%, 100% {
-
-            transform:
-                translate(0);
-
-            opacity: 1;
-        }
-
-        89% {
-
-            transform:
-                translate(-3px,1px);
-
-            opacity: .7;
-        }
-
-        90% {
-
-            transform:
-                translate(4px,-1px);
-
-            opacity: .9;
-        }
-
-        91% {
-
-            transform:
-                translate(0);
-
-            opacity: 1;
-        }
-    }
-
-
-    .database-title {
-
-        margin-top: 15px;
-
-        font-family:
-            "Rajdhani",
-            sans-serif;
-
-        font-size:
-            clamp(25px,4vw,50px);
-
-        letter-spacing:
-            .3em;
-
-        color:
-            #65777b;
-    }
-
-
-    .connection {
-
-        margin: 35px 0;
-
-        color:
-            #719278;
-
-        font-size:
-            11px;
-
-        letter-spacing:
-            5px;
-
-        animation:
-            connectionBlink 3s infinite;
-    }
-
-
-    @keyframes connectionBlink {
-
-        0%,40%,44%,100% {
-
-            opacity: 1;
-        }
-
-        42% {
-
-            opacity: .1;
-        }
-
-        70% {
-
-            opacity: .7;
-        }
-
-        72% {
-
-            opacity: .05;
-        }
-
-        74% {
-
-            opacity: 1;
-        }
-    }
-
-
-    .access-warning {
-
-        margin:
-            60px 0 35px;
-
-        color:
-            #9b9b9b;
-
-        font-size:
-            16px;
-
-        line-height:
-            2;
-
-        letter-spacing:
-            5px;
-    }
-
-
-    .access-warning span {
-
-        display: block;
-
-        color:
-            #bcbcbc;
-
-        animation:
-            warningFlicker 5s infinite;
-    }
-
-
-    @keyframes warningFlicker {
-
-        0%,90%,100% {
-
-            opacity: 1;
-        }
-
-        92% {
-
-            opacity: .2;
-        }
-
-        94% {
-
-            opacity: 1;
-        }
-    }
-
-
-    /* =====================================================
-       BOTÃO DE ENTRADA
-    ===================================================== */
-
-    .enter-button {
-
-        position: relative;
-
-        padding:
-            18px 45px;
-
-        border:
-            1px solid #526970;
-
-        background:
-            rgba(3,5,6,.75);
-
-        color:
-            #bfc8ca;
-
-        font-family:
-            "IBM Plex Mono",
-            monospace;
-
-        font-size:
-            11px;
-
-        letter-spacing:
-            4px;
-
-        overflow: hidden;
-
-        transition:
-            .4s;
-    }
-
-
-    .enter-button::before {
-
-        content: "";
-
-        position: absolute;
-
-        top: 0;
-
-        left: -100%;
-
-        width: 100%;
-
-        height: 100%;
-
-        background:
-
-            linear-gradient(
-                90deg,
-                transparent,
-                rgba(255,255,255,.15),
-                transparent
-            );
-
-        transition:
-            .7s;
-    }
-
-
-    .enter-button:hover::before {
-
-        left: 100%;
-    }
-
-
-    .enter-button:hover {
-
-        border-color:
-            #aab7ba;
-
-        color:
-            white;
-
-        box-shadow:
-            0 0 30px
-            rgba(120,140,145,.15);
-
-        transform:
-            scale(1.03);
-    }
-
-
-    .enter-button.warning-state {
-
-        border-color:
-            #8f1616;
-
-        color:
-            #d00000;
-
-        background:
-            rgba(40,0,0,.4);
-
-        animation:
-            dangerousGlitch .15s infinite;
-    }
-
-
-    @keyframes dangerousGlitch {
-
-        0% {
-            transform: translate(0);
-        }
-
-        25% {
-            transform: translate(-3px,1px);
-        }
-
-        50% {
-            transform: translate(2px,-2px);
-        }
-
-        75% {
-            transform: translate(3px,1px);
-        }
-
-        100% {
-            transform: translate(0);
-        }
-    }
-
-
-    /* =====================================================
-       BANCO DE DADOS
-    ===================================================== */
-
-    .database {
-
-        position: relative;
-
-        min-height: 100vh;
-
-        padding:
-            120px 8%;
-
-        background:
-
-            radial-gradient(
-                circle at center,
-                #111719 0%,
-                #06090a 45%,
-                #020303 100%
-            );
-
-        overflow: hidden;
-    }
-
-
-    .database::before {
-
-        content: "";
-
-        position: absolute;
-
-        inset: 0;
-
-        pointer-events: none;
-
-        background:
-
-            repeating-linear-gradient(
-                0deg,
-                transparent 0px,
-                transparent 3px,
-                rgba(255,255,255,.025) 4px
-            );
-
-        opacity: .35;
-    }
-
-
-    /* =====================================================
-       CABEÇALHO
-    ===================================================== */
-
-    .database-header {
-
-        position: relative;
-
-        max-width: 1000px;
-
-        margin:
-            auto auto 70px;
-
-        text-align:
-            center;
-    }
-
-
-    .terminal-text {
-
-        display: block;
-
-        margin-bottom:
-            20px;
-
-        color:
-            #657173;
-
-        font-size:
-            11px;
-
-        letter-spacing:
-            4px;
-    }
-
-
-    .database-header h1 {
-
-        margin: 0;
-
-        font-family:
-            "Rajdhani",
-            sans-serif;
-
-        font-size:
-            clamp(45px,7vw,90px);
-
-        letter-spacing:
-            8px;
-
-        color:
-            #e5e5e5;
-
-        text-shadow:
-            0 0 10px
-            rgba(255,255,255,.15);
-    }
-
-
-    .database-header p {
-
-        color:
-            #686f70;
-
-        margin-top:
-            15px;
-
-        font-size:
-            11px;
-    }
-
-
-    .divider {
-
-        width:
-            100%;
-
-        height:
-            1px;
-
-        margin:
-            30px 0;
-
-        background:
-            #293033;
-
-        opacity:
-            .6;
-    }
-
-
-    /* =====================================================
-       PESQUISA
-    ===================================================== */
-
-    .search-container {
-
-        max-width:
-            1000px;
-
-        margin:
-            0 auto 25px;
-    }
-
-
-    .search-label {
-
-        display:
-            flex;
-
-        justify-content:
-            space-between;
-
-        margin-bottom:
-            8px;
-
-        font-size:
-            10px;
-
-        letter-spacing:
-            2px;
-
-        color:
-            #626b6c;
-    }
-
-
-    .status {
-
-        color:
-            #719278;
-    }
-
-
-    .search-box {
-
-        display:
-            flex;
-
-        align-items:
-            center;
-
-        height:
-            60px;
-
-        border:
-            1px solid #293335;
-
-        background:
-            #070b0c;
-
-        transition:
-            .3s;
-    }
-
-
-    .search-box:focus-within {
-
-        border-color:
-            #667174;
-
-        box-shadow:
-            0 0 25px
-            rgba(120,140,145,.08);
-    }
-
-
-    .search-symbol {
-
-        padding-left:
-            20px;
-
-        color:
-            #707b7d;
-
-        font-size:
-            20px;
-    }
-
-
-    .search-box input {
-
-        flex:
-            1;
-
-        height:
-            100%;
-
-        padding:
-            0 15px;
-
-        border:
-            none;
-
-        outline:
-            none;
-
-        background:
-            transparent;
-
-        color:
-            #dcdcdc;
-
-        font-family:
-            "IBM Plex Mono",
-            monospace;
-
-        font-size:
-            14px;
-    }
-
-
-    .search-box input::placeholder {
-
-        color:
-            #3e4648;
-    }
-
-
-    .search-box button {
-
-        height:
-            100%;
-
-        padding:
-            0 30px;
-
-        border:
-            none;
-
-        border-left:
-            1px solid #293335;
-
-        background:
-            #101718;
-
-        color:
-            #aeb5b6;
-
-        font-family:
-            "IBM Plex Mono",
-            monospace;
-
-        transition:
-            .3s;
-    }
-
-
-    .search-box button:hover {
-
-        background:
-            #20292b;
-
-        color:
-            white;
-    }
-
-
-    /* =====================================================
-       STATUS
-    ===================================================== */
-
-    .database-status {
-
-        max-width:
-            1000px;
-
-        margin:
-            0 auto 35px;
-
-        font-size:
-            10px;
-
-        color:
-            #4f595b;
-
-        letter-spacing:
-            2px;
-    }
-
-
-    /* =====================================================
-       GRID
-    ===================================================== */
-
-    .scp-grid {
-
-        max-width:
-            1100px;
-
-        margin:
-            auto;
-
-        display:
-            grid;
-
-        grid-template-columns:
-            repeat(3,1fr);
-
-        gap:
-            25px;
-    }
-
-
-    /* =====================================================
-       CARD
-    ===================================================== */
-
-    .scp-card {
-
-        position:
-            relative;
-
-        background:
-            #080c0d;
-
-        border:
-            1px solid #202729;
-
-        overflow:
-            hidden;
-
-        transition:
-            transform .4s,
-            border .4s,
-            box-shadow .4s;
-    }
-
-
-    .scp-card:hover {
-
-        transform:
-            translateY(-8px);
-
-        border-color:
-            #566063;
-
-        box-shadow:
-            0 15px 50px
-            rgba(0,0,0,.7);
-    }
-
-
-    .scp-image {
-
-        position:
-            relative;
-
-        height:
-            330px;
-
-        overflow:
-            hidden;
-    }
-
-
-    .scp-image img {
-
-        width:
-            100%;
-
-        height:
-            100%;
-
-        object-fit:
-            cover;
-
-        filter:
-            grayscale(100%)
-            contrast(1.3)
-            brightness(.48);
-
-        transition:
-            transform .7s,
-            filter .7s;
-    }
-
-
-    .scp-card:hover
-    .scp-image img {
-
-        transform:
-            scale(1.08);
-
-        filter:
-            grayscale(100%)
-            contrast(1.5)
-            brightness(.32);
-    }
-
-
-    .scp-image::after {
-
-        content:
-            "REC • FOUNDATION SURVEILLANCE";
-
-        position:
-            absolute;
-
-        top:
-            12px;
-
-        left:
-            12px;
-
-        padding:
-            4px 7px;
-
-        background:
-            rgba(0,0,0,.7);
-
-        color:
-            #697577;
-
-        font-size:
-            8px;
-
-        letter-spacing:
-            1px;
-
-        z-index:
-            3;
-    }
-
-
-    .scp-image::before {
-
-        content:
-            "";
-
-        position:
-            absolute;
-
-        inset:
-            0;
-
-        z-index:
-            2;
-
-        pointer-events:
-            none;
-
-        background:
-
-            repeating-linear-gradient(
-                0deg,
-                transparent 0px,
-                transparent 5px,
-                rgba(255,255,255,.025) 6px
-            );
-    }
-
-
-    .image-overlay {
-
-        position:
-            absolute;
-
-        inset:
-            0;
-
-        z-index:
-            2;
-
-        background:
-
-            linear-gradient(
-                to top,
-                #080c0d 0%,
-                transparent 65%
-            );
-    }
-
-
-    .scp-number {
-
-        position:
-            absolute;
-
-        left:
-            20px;
-
-        bottom:
-            20px;
-
-        z-index:
-            4;
-
-        font-size:
-            13px;
-
-        letter-spacing:
-            3px;
-
-        color:
-            #d0d0d0;
-    }
-
-
-    /* =====================================================
-       INFORMAÇÕES
-    ===================================================== */
-
-    .scp-info {
-
-        padding:
-            25px;
-    }
-
-
-    .scp-class {
-
-        display:
-            flex;
-
-        justify-content:
-            space-between;
-
-        margin-bottom:
-            15px;
-
-        font-size:
-            9px;
-
-        letter-spacing:
-            1px;
-
-        color:
-            #596365;
-    }
-
-
-    .scp-class strong {
-
-        color:
-            #90999a;
-    }
-
-
-    .scp-info h2 {
-
-        margin:
-            0 0 12px;
-
-        font-family:
-            "Rajdhani",
-            sans-serif;
-
-        font-size:
-            27px;
-
-        letter-spacing:
-            3px;
-    }
-
-
-    .scp-info p {
-
-        min-height:
-            70px;
-
-        margin-bottom:
-            25px;
-
-        color:
-            #646d6f;
-
-        font-size:
-            11px;
-
-        line-height:
-            1.7;
-    }
-
-
-    .access-button {
-
-        width:
-            100%;
-
-        padding:
-            14px;
-
-        border:
-            1px solid #30393b;
-
-        background:
-            transparent;
-
-        color:
-            #969e9f;
-
-        font-family:
-            "IBM Plex Mono",
-            monospace;
-
-        font-size:
-            10px;
-
-        letter-spacing:
-            2px;
-
-        transition:
-            .3s;
-    }
-
-
-    .access-button:hover {
-
-        background:
-            #d8d8d8;
-
-        color:
-            #050606;
-
-        border-color:
-            white;
-    }
-
-
-    /* =====================================================
-       RESULTADO VAZIO
-    ===================================================== */
-
-    .no-results {
-
-        display:
-            none;
-
-        max-width:
-            700px;
-
-        margin:
-            80px auto;
-
-        padding:
-            50px;
-
-        text-align:
-            center;
-
-        border:
-            1px solid #461919;
-
-        background:
-            #100707;
-    }
-
-
-    .error-symbol {
-
-        width:
-            50px;
-
-        height:
-            50px;
-
-        margin:
-            auto auto 20px;
-
-        display:
-            flex;
-
-        align-items:
-            center;
-
-        justify-content:
-            center;
-
-        border:
-            1px solid #8b2525;
-
-        color:
-            #d34b4b;
-
-        font-size:
-            25px;
-    }
-
-
-    .no-results h2 {
-
-        color:
-            #bd4444;
-
-        letter-spacing:
-            4px;
-    }
-
-
-    .no-results p {
-
-        color:
-            #756363;
-
-        font-size:
-            12px;
-
-        line-height:
-            1.7;
-    }
-
-
-    /* =====================================================
-       MODAL
-    ===================================================== */
-
-    .scp-modal {
-
-        position:
-            fixed;
-
-        inset:
-            0;
-
-        z-index:
-            9000;
-
-        display:
-            none;
-
-        align-items:
-            center;
-
-        justify-content:
-            center;
-
-        padding:
-            30px;
-
-        background:
-            rgba(0,0,0,.93);
-
-        backdrop-filter:
-            blur(8px);
-    }
-
-
-    .scp-modal.active {
-
-        display:
-            flex;
-
-        animation:
-            modalAppear .3s ease;
-    }
-
-
-    @keyframes modalAppear {
-
-        from {
-
-            opacity:
-                0;
-
-            filter:
-                blur(10px);
-        }
-
-        to {
-
-            opacity:
-                1;
-
-            filter:
-                blur(0);
-        }
-    }
-
-
-    .modal-content {
-
-        position:
-            relative;
-
-        width:
-            min(1000px,100%);
-
-        max-height:
-            90vh;
-
-        overflow-y:
-            auto;
-
-        padding:
-            35px;
-
-        background:
-            #080c0d;
-
-        border:
-            1px solid #3a4446;
-
-        box-shadow:
-            0 0 100px
-            rgba(0,0,0,.9);
-    }
-
-
-    .close-modal {
-
-        position:
-            absolute;
-
-        top:
-            15px;
-
-        right:
-            20px;
-
-        border:
-            none;
-
-        background:
-            transparent;
-
-        color:
-            #737c7e;
-
-        font-size:
-            30px;
-    }
-
-
-    .close-modal:hover {
-
-        color:
-            white;
-    }
-
-
-    .modal-header {
-
-        padding-bottom:
-            20px;
-
-        border-bottom:
-            1px solid #222a2c;
-
-        color:
-            #626b6d;
-
-        font-size:
-            10px;
-
-        letter-spacing:
-            2px;
-    }
-
-
-    .modal-header div {
-
-        margin-top:
-            12px;
-
-        color:
-            #e1e1e1;
-
-        font-family:
-            "Rajdhani",
-            sans-serif;
-
-        font-size:
-            38px;
-
-        letter-spacing:
-            5px;
-    }
-
-
-    .warning {
-
-        margin:
-            20px 0;
-
-        padding:
-            12px;
-
-        border:
-            1px solid #482020;
-
-        background:
-            #140909;
-
-        color:
-            #a34444;
-
-        font-size:
-            10px;
-
-        letter-spacing:
-            1px;
-    }
-
-
-    .modal-body {
-
-        display:
-            grid;
-
-        grid-template-columns:
-            40% 60%;
-
-        gap:
-            30px;
-    }
-
-
-    .modal-image {
-
-        height:
-            350px;
-
-        overflow:
-            hidden;
-    }
-
-
-    .modal-image img {
-
-        width:
-            100%;
-
-        height:
-            100%;
-
-        object-fit:
-            cover;
-
-        filter:
-            grayscale(100%)
-            contrast(1.3)
-            brightness(.5);
-    }
-
-
-    .modal-data {
-
-        font-size:
-            11px;
-    }
-
-
-    .data-row {
-
-        padding:
-            15px 0;
-
-        border-bottom:
-            1px solid #202729;
-    }
-
-
-    .data-row > span {
-
-        display:
-            block;
-
-        margin-bottom:
-            7px;
-
-        color:
-            #586264;
-
-        font-size:
-            9px;
-
-        letter-spacing:
-            2px;
-    }
-
-
-    .data-row strong {
-
-        color:
-            #d2d2d2;
-    }
-
-
-    .description p {
-
-        color:
-            #818a8c;
-
-        font-size:
-            11px;
-
-        line-height:
-            1.8;
-    }
-
-
-    .threat-level {
-
-        color:
-            #b64a4a;
-
-        letter-spacing:
-            2px;
-    }
-
-
-    .survival {
-
-        margin-top:
-            20px;
-
-        padding:
-            20px;
-
-        border-left:
-            2px solid #8a2727;
-
-        background:
-            #100909;
-    }
-
-
-    .survival span {
-
-        color:
-            #a14343;
-
-        font-size:
-            9px;
-
-        letter-spacing:
-            2px;
-    }
-
-
-    .survival p {
-
-        color:
-            #a7a0a0;
-
-        font-size:
-            11px;
-
-        line-height:
-            1.8;
-    }
-
-
-    /* =====================================================
-       MENSAGEM DO SISTEMA
-    ===================================================== */
-
-    .system-message {
-
-        position:
-            fixed;
-
-        bottom:
-            20px;
-
-        left:
-            20px;
-
-        z-index:
-            3000;
-
-        color:
-            #394346;
-
-        font-size:
-            9px;
-
-        letter-spacing:
-            2px;
-
-        pointer-events:
-            none;
-
-        transition:
-            .5s;
-    }
-
-
-    .system-message.warning {
-
-        color:
-            #8f1616;
-
-        text-shadow:
-            0 0 10px
-            rgba(143,22,22,.5);
-    }
-
-
-    /* =====================================================
-       ERRO DO SISTEMA
-    ===================================================== */
-
-    .system-error::before {
-
-        content:
-            "WARNING // UNAUTHORIZED ACCESS // SIGNAL CORRUPTED";
-
-        position:
-            fixed;
-
-        top:
-            20px;
-
-        left:
-            50%;
-
-        transform:
-            translateX(-50%);
-
-        z-index:
-            11000;
-
-        padding:
-            8px 20px;
-
-        border:
-            1px solid #8f1616;
-
-        background:
-            rgba(20,0,0,.85);
-
-        color:
-            #d00000;
-
-        font-size:
-            10px;
-
-        letter-spacing:
-            3px;
-
-        animation:
-            warningAppear .15s infinite;
-    }
-
-
-    @keyframes warningAppear {
-
-        0%,100% {
-            opacity: 1;
-        }
-
-        30% {
-            opacity: .3;
-        }
-
-        60% {
-            opacity: 1;
-        }
-
-        80% {
-            opacity: .1;
-        }
-    }
-
-
-    .system-error .database {
-
-        animation:
-            screenDistortion .18s infinite;
-    }
-
-
-    @keyframes screenDistortion {
-
-        0% {
-            transform: translate(0);
-        }
-
-        20% {
-            transform: translate(-2px,1px);
-        }
-
-        40% {
-            transform: translate(2px,-1px);
-        }
-
-        60% {
-            transform: translate(-1px,2px);
-        }
-
-        80% {
-            transform: translate(1px,-2px);
-        }
-
-        100% {
-            transform: translate(0);
-        }
-    }
-
-
-    /* =====================================================
-       RESPONSIVO
-    ===================================================== */
-
-    @media (max-width: 800px) {
-
-        .database {
-
-            padding:
-                80px 5%;
-        }
-
-
-        .scp-grid {
-
-            grid-template-columns:
-                1fr;
-        }
-
-
-        .modal-body {
-
-            grid-template-columns:
-                1fr;
-        }
-
-
-        .modal-image {
-
-            height:
-                250px;
-        }
-
-
-        .search-box button {
-
-            padding:
-                0 15px;
-        }
-    }
-
-
-    @media (max-width: 500px) {
-
-        .database-header h1 {
-
-            font-size:
-                38px;
-
-            letter-spacing:
-                4px;
-        }
-
-
-        .search-box {
-
-            height:
-                50px;
-        }
-
-
-        .search-box input {
-
-            font-size:
-                10px;
-        }
-
-
-        .search-box button {
-
-            font-size:
-                9px;
-        }
-
-
-        .access-warning {
-
-            font-size:
-                12px;
-
-            letter-spacing:
-                3px;
-        }
-    }
-
-    </style>
 
 </head>
 
@@ -2013,7 +111,7 @@
 
 
         <p>
-            SECURE • CONTAIN • PROTECT
+            SECURE â€¢ CONTAIN â€¢ PROTECT
         </p>
 
 
@@ -2036,7 +134,7 @@
             </span>
 
             <span class="status">
-                ● ONLINE
+                â— ONLINE
             </span>
 
         </div>
@@ -2133,8 +231,8 @@
 
 
                 <p>
-                    Entidade humanoide anômala
-                    que não apresenta movimento
+                    Entidade humanoide anÃ´mala
+                    que nÃ£o apresenta movimento
                     enquanto observada diretamente.
                 </p>
 
@@ -2259,8 +357,8 @@
 
 
                 <p>
-                    Espécie primata anômala
-                    associada a eventos históricos
+                    EspÃ©cie primata anÃ´mala
+                    associada a eventos histÃ³ricos
                     desconhecidos.
                 </p>
 
@@ -2322,8 +420,8 @@
 
 
                 <p>
-                    Estrutura submarina anômala
-                    de dimensões incompatíveis
+                    Estrutura submarina anÃ´mala
+                    de dimensÃµes incompatÃ­veis
                     com sua origem conhecida.
                 </p>
 
@@ -2385,9 +483,9 @@
 
 
                 <p>
-                    Entidade aquática colossal
+                    Entidade aquÃ¡tica colossal
                     associada a efeitos cognitivos
-                    e perda de memória.
+                    e perda de memÃ³ria.
                 </p>
 
 
@@ -2449,7 +547,7 @@
 
                 <p>
                     Objeto aparentemente inofensivo
-                    relacionado a fenômenos cognitivos.
+                    relacionado a fenÃ´menos cognitivos.
                 </p>
 
 
@@ -2511,7 +609,7 @@
 
                 <p>
                     Entidade humanoide extremamente
-                    sensível à observação de seu rosto.
+                    sensÃ­vel Ã  observaÃ§Ã£o de seu rosto.
                 </p>
 
 
@@ -2573,8 +671,8 @@
 
                 <p>
                     Entidade humanoide capaz de
-                    atravessar superfícies e acessar
-                    um espaço extradimensional.
+                    atravessar superfÃ­cies e acessar
+                    um espaÃ§o extradimensional.
                 </p>
 
 
@@ -2635,9 +733,9 @@
 
 
                 <p>
-                    Estrutura comercial anômala
-                    cuja dimensão interna não
-                    corresponde ao espaço externo.
+                    Estrutura comercial anÃ´mala
+                    cuja dimensÃ£o interna nÃ£o
+                    corresponde ao espaÃ§o externo.
                 </p>
 
 
@@ -2699,8 +797,8 @@
 
                 <p>
                     Estrutura colossal localizada
-                    em uma região remota da
-                    floresta amazônica.
+                    em uma regiÃ£o remota da
+                    floresta amazÃ´nica.
                 </p>
 
 
@@ -2734,7 +832,7 @@
                 <div class="image-overlay"></div>
 
                 <div class="scp-number">
-                    SCP-4971 ▽
+                    SCP-4971 â–½
                 </div>
 
             </div>
@@ -2761,9 +859,9 @@
 
 
                 <p>
-                    Entidade anômala associada
-                    a fenômenos rituais e
-                    manifestações extradimensionais.
+                    Entidade anÃ´mala associada
+                    a fenÃ´menos rituais e
+                    manifestaÃ§Ãµes extradimensionais.
                 </p>
 
 
@@ -2913,7 +1011,7 @@
             class="close-modal"
             id="closeModal">
 
-            ×
+            Ã—
 
         </button>
 
@@ -2931,7 +1029,7 @@
 
         <div class="warning">
 
-            ⚠ CLASSIFIED INFORMATION //
+            âš  CLASSIFIED INFORMATION //
             UNAUTHORIZED ACCESS WILL BE RECORDED
 
         </div>
@@ -2976,7 +1074,7 @@
                         class="threat-level"
                         id="modalThreat">
 
-                        ███████░░░
+                        â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–‘â–‘â–‘
 
                     </strong>
 
@@ -3041,16 +1139,16 @@ const scpDatabase = {
             "EUCLID",
 
         threat:
-            "███████░░░",
+            "â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–‘â–‘â–‘",
 
         image:
             "imagensScps/Scp 173.jfif",
 
         description:
-            "Uma entidade anômala de aparência humanoide. Seu comportamento apresenta uma característica crítica: o movimento parece ocorrer quando a observação visual direta é interrompida.",
+            "Uma entidade anÃ´mala de aparÃªncia humanoide. Seu comportamento apresenta uma caracterÃ­stica crÃ­tica: o movimento parece ocorrer quando a observaÃ§Ã£o visual direta Ã© interrompida.",
 
         protocol:
-            "Mantenha observação direta sempre que possível. Coordene qualquer movimento ou piscada entre os membros da equipe."
+            "Mantenha observaÃ§Ã£o direta sempre que possÃ­vel. Coordene qualquer movimento ou piscada entre os membros da equipe."
     },
 
 
@@ -3066,16 +1164,16 @@ const scpDatabase = {
             "KETER",
 
         threat:
-            "██████████",
+            "â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ",
 
         image:
             "imagensScps/transferir.jfif",
 
         description:
-            "Uma criatura reptiliana extremamente resistente, inteligente e hostil. Sua capacidade de adaptação torna a contenção uma tarefa de alto risco.",
+            "Uma criatura reptiliana extremamente resistente, inteligente e hostil. Sua capacidade de adaptaÃ§Ã£o torna a contenÃ§Ã£o uma tarefa de alto risco.",
 
         protocol:
-            "Mantenha a entidade em contenção permanente. Não tente contato sem autorização de pessoal especializado."
+            "Mantenha a entidade em contenÃ§Ã£o permanente. NÃ£o tente contato sem autorizaÃ§Ã£o de pessoal especializado."
     },
 
 
@@ -3091,16 +1189,16 @@ const scpDatabase = {
             "KETER",
 
         threat:
-            "████████░░",
+            "â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–‘â–‘",
 
         image:
             "imagensScps/macaco.jfif",
 
         description:
-            "Espécie primata anômala associada a registros históricos e eventos relacionados à evolução humana.",
+            "EspÃ©cie primata anÃ´mala associada a registros histÃ³ricos e eventos relacionados Ã  evoluÃ§Ã£o humana.",
 
         protocol:
-            "Não estabeleça contato sem autorização. Todas as manifestações devem ser comunicadas imediatamente."
+            "NÃ£o estabeleÃ§a contato sem autorizaÃ§Ã£o. Todas as manifestaÃ§Ãµes devem ser comunicadas imediatamente."
     },
 
 
@@ -3116,16 +1214,16 @@ const scpDatabase = {
             "THAUMIEL",
 
         threat:
-            "██████░░░░",
+            "â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–‘â–‘â–‘â–‘",
 
         image:
             "imagensScps/Submarino.jfif",
 
         description:
-            "Uma estrutura submarina anômala de proporções extraordinárias cuja composição e origem permanecem parcialmente desconhecidas.",
+            "Uma estrutura submarina anÃ´mala de proporÃ§Ãµes extraordinÃ¡rias cuja composiÃ§Ã£o e origem permanecem parcialmente desconhecidas.",
 
         protocol:
-            "Uso restrito ao pessoal autorizado pela Fundação."
+            "Uso restrito ao pessoal autorizado pela FundaÃ§Ã£o."
     },
 
 
@@ -3141,16 +1239,16 @@ const scpDatabase = {
             "THAUMIEL",
 
         threat:
-            "████████░░",
+            "â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–‘â–‘",
 
         image:
             "imagensScps/SCP-3000.jfif",
 
         description:
-            "Uma entidade aquática colossal associada a alterações cognitivas, perda de memória e outros efeitos psicológicos.",
+            "Uma entidade aquÃ¡tica colossal associada a alteraÃ§Ãµes cognitivas, perda de memÃ³ria e outros efeitos psicolÃ³gicos.",
 
         protocol:
-            "Não se aproxime da entidade. Qualquer exposição deve ser imediatamente comunicada."
+            "NÃ£o se aproxime da entidade. Qualquer exposiÃ§Ã£o deve ser imediatamente comunicada."
     },
 
 
@@ -3166,16 +1264,16 @@ const scpDatabase = {
             "APOLLYON",
 
         threat:
-            "██████████",
+            "â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ",
 
         image:
             "imagensScps/lanterna.jfif",
 
         description:
-            "Um objeto aparentemente comum associado a fenômenos visuais e efeitos cognitivos anômalos.",
+            "Um objeto aparentemente comum associado a fenÃ´menos visuais e efeitos cognitivos anÃ´malos.",
 
         protocol:
-            "Evite observação prolongada e siga os protocolos de contenção estabelecidos."
+            "Evite observaÃ§Ã£o prolongada e siga os protocolos de contenÃ§Ã£o estabelecidos."
     },
 
 
@@ -3191,16 +1289,16 @@ const scpDatabase = {
             "EUCLID",
 
         threat:
-            "█████████░",
+            "â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–‘",
 
         image:
             "imagensScps/096.jfif",
 
         description:
-            "Uma entidade humanoide extremamente sensível à observação de seu rosto.",
+            "Uma entidade humanoide extremamente sensÃ­vel Ã  observaÃ§Ã£o de seu rosto.",
 
         protocol:
-            "NÃO OBSERVE O ROSTO DA ENTIDADE. Evite imagens, gravações ou qualquer forma de exposição visual."
+            "NÃƒO OBSERVE O ROSTO DA ENTIDADE. Evite imagens, gravaÃ§Ãµes ou qualquer forma de exposiÃ§Ã£o visual."
     },
 
 
@@ -3216,16 +1314,16 @@ const scpDatabase = {
             "KETER",
 
         threat:
-            "█████████░",
+            "â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–‘",
 
         image:
             "imagensScps/106.jfif",
 
         description:
-            "Uma entidade humanoide anômala capaz de atravessar superfícies e acessar um ambiente extradimensional.",
+            "Uma entidade humanoide anÃ´mala capaz de atravessar superfÃ­cies e acessar um ambiente extradimensional.",
 
         protocol:
-            "Não confie em portas ou paredes durante uma manifestação. Mantenha distância e aguarde as equipes de contenção."
+            "NÃ£o confie em portas ou paredes durante uma manifestaÃ§Ã£o. Mantenha distÃ¢ncia e aguarde as equipes de contenÃ§Ã£o."
     },
 
 
@@ -3241,16 +1339,16 @@ const scpDatabase = {
             "KETER",
 
         threat:
-            "████████░░",
+            "â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–‘â–‘",
 
         image:
             "imagensScps/3008.jfif",
 
         description:
-            "Uma estrutura comercial cujo interior apresenta dimensões incompatíveis com o espaço exterior.",
+            "Uma estrutura comercial cujo interior apresenta dimensÃµes incompatÃ­veis com o espaÃ§o exterior.",
 
         protocol:
-            "Procure abrigo, conserve recursos e evite entidades hostis durante períodos de baixa iluminação."
+            "Procure abrigo, conserve recursos e evite entidades hostis durante perÃ­odos de baixa iluminaÃ§Ã£o."
     },
 
 
@@ -3266,23 +1364,23 @@ const scpDatabase = {
             "THAUMIEL",
 
         threat:
-            "██████████",
+            "â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ",
 
         image:
             "imagensScps/6666.png",
 
         description:
-            "Uma estrutura colossal localizada em uma região remota. Sua escala ultrapassa qualquer estrutura biológica conhecida.",
+            "Uma estrutura colossal localizada em uma regiÃ£o remota. Sua escala ultrapassa qualquer estrutura biolÃ³gica conhecida.",
 
         protocol:
-            "Não entre na área de contenção sem equipamento apropriado e autorização."
+            "NÃ£o entre na Ã¡rea de contenÃ§Ã£o sem equipamento apropriado e autorizaÃ§Ã£o."
     },
 
 
     "4971": {
 
         name:
-            "SCP-4971 ▽",
+            "SCP-4971 â–½",
 
         title:
             "THE DEER",
@@ -3291,16 +1389,16 @@ const scpDatabase = {
             "THAUMIEL",
 
         threat:
-            "█████████░",
+            "â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–‘",
 
         image:
             "imagensScps/4971.png",
 
         description:
-            "Uma entidade anômala associada a fenômenos rituais e manifestações em ambientes florestais.",
+            "Uma entidade anÃ´mala associada a fenÃ´menos rituais e manifestaÃ§Ãµes em ambientes florestais.",
 
         protocol:
-            "Não tente estabelecer contato. Informe imediatamente qualquer manifestação da entidade."
+            "NÃ£o tente estabelecer contato. Informe imediatamente qualquer manifestaÃ§Ã£o da entidade."
     },
 
 
@@ -3316,16 +1414,16 @@ const scpDatabase = {
             "APOLLYON",
 
         threat:
-            "██████████",
+            "â–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆâ–ˆ",
 
         image:
             "imagensScps/2317.jfif",
 
         description:
-            "Uma passagem que conduz a um ambiente desconhecido e apresenta uma conexão com uma entidade de grande escala.",
+            "Uma passagem que conduz a um ambiente desconhecido e apresenta uma conexÃ£o com uma entidade de grande escala.",
 
         protocol:
-            "Acesso extremamente restrito. Não atravesse a passagem sem autorização."
+            "Acesso extremamente restrito. NÃ£o atravesse a passagem sem autorizaÃ§Ã£o."
     }
 
 };
@@ -3430,7 +1528,7 @@ function searchDatabase() {
 
 
 /* =====================================================
-   BOTÃO DE PESQUISA
+   BOTÃƒO DE PESQUISA
 ===================================================== */
 
 searchButton.addEventListener(
@@ -3701,7 +1799,7 @@ enterDatabase.addEventListener(
 
 
 /* =====================================================
-   MENSAGENS ALEATÓRIAS DO SISTEMA
+   MENSAGENS ALEATÃ“RIAS DO SISTEMA
 ===================================================== */
 
 const systemMessage =
