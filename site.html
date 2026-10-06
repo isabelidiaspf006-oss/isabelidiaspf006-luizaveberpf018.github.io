@@ -1,0 +1,1679 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SCP FOUNDATION // RESTRICTED DATABASE</title>
+
+
+    <!-- FONTES -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Rajdhani:wght@400;500;600;700&display=swap"
+          rel="stylesheet">
+
+
+<style>
+
+/* =====================================================
+   CONFIGURAÇÃO GERAL
+===================================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+
+    margin: 0;
+
+    background: #030506;
+
+    color: #d8d8d8;
+
+    font-family:
+        "IBM Plex Mono",
+        monospace;
+
+    overflow-x: hidden;
+
+    position: relative;
+}
+
+
+/* =====================================================
+   VHS — LINHAS DE TELEVISÃO
+===================================================== */
+
+body::before {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    z-index: 9998;
+
+    background:
+
+        repeating-linear-gradient(
+            0deg,
+            rgba(255,255,255,.025) 0px,
+            rgba(255,255,255,.025) 1px,
+            transparent 1px,
+            transparent 4px
+        );
+
+    opacity: .55;
+
+    animation:
+        vhsScanlines .18s linear infinite;
+}
+
+
+@keyframes vhsScanlines {
+
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(4px);
+    }
+
+}
+
+
+/* =====================================================
+   VHS — RUÍDO
+===================================================== */
+
+body::after {
+
+    content: "";
+
+    position: fixed;
+
+    inset: -50%;
+
+    pointer-events: none;
+
+    z-index: 9997;
+
+    opacity: .08;
+
+    background-image:
+
+        repeating-radial-gradient(
+            circle at 0 0,
+            rgba(255,255,255,.15) 0,
+            rgba(255,255,255,.15) 1px,
+            transparent 1px,
+            transparent 3px
+        );
+
+    background-size: 5px 5px;
+
+    animation:
+        vhsNoise .12s steps(2) infinite;
+}
+
+
+@keyframes vhsNoise {
+
+    0% {
+        transform: translate(0,0);
+    }
+
+    25% {
+        transform: translate(-2%,1%);
+    }
+
+    50% {
+        transform: translate(1%,-2%);
+    }
+
+    75% {
+        transform: translate(2%,2%);
+    }
+
+    100% {
+        transform: translate(-1%,-1%);
+    }
+
+}
+
+
+/* =====================================================
+   CURSOR
+===================================================== */
+
+body,
+button,
+input {
+    cursor: crosshair;
+}
+
+button,
+a {
+    cursor: pointer;
+}
+
+
+/* =====================================================
+   TELA INICIAL
+===================================================== */
+
+#accessScreen {
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 5000;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    overflow: hidden;
+
+    background:
+
+        linear-gradient(
+            rgba(0,0,0,.68),
+            rgba(0,0,0,.94)
+        ),
+
+        url("imagensScps/6666.png");
+
+    background-size: cover;
+
+    background-position: center;
+
+    animation:
+        backgroundPulse 12s ease-in-out infinite;
+
+    transition:
+        opacity 1.5s ease,
+        visibility 1.5s ease;
+}
+
+
+#accessScreen.hidden {
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+}
+
+
+#accessScreen::before {
+
+    content: "";
+
+    position: absolute;
+
+    inset: -20%;
+
+    background:
+
+        radial-gradient(
+            ellipse at center,
+            transparent 15%,
+            rgba(0,0,0,.35) 55%,
+            rgba(0,0,0,.96) 100%
+        );
+
+    pointer-events: none;
+}
+
+
+#accessScreen::after {
+
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+
+    background:
+
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 3px,
+            rgba(255,255,255,.04) 4px
+        );
+
+    opacity: .8;
+}
+
+
+@keyframes backgroundPulse {
+
+    0%, 100% {
+
+        background-position: center;
+
+        filter:
+            brightness(.65)
+            contrast(1.2);
+    }
+
+    50% {
+
+        background-position: 52% 48%;
+
+        filter:
+            brightness(.42)
+            contrast(1.4);
+    }
+}
+
+
+/* =====================================================
+   CONTEÚDO DA TELA INICIAL
+===================================================== */
+
+.access-content {
+
+    position: relative;
+
+    z-index: 2;
+
+    width: min(900px,90%);
+
+    padding: 40px;
+
+    animation:
+        terminalAppear 2s ease;
+}
+
+
+@keyframes terminalAppear {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(20px);
+
+        filter:
+            blur(8px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+        filter:
+            blur(0);
+    }
+
+}
+
+
+.foundation {
+
+    font-family:
+        "Rajdhani",
+        sans-serif;
+
+    font-size:
+        clamp(40px,8vw,90px);
+
+    font-weight: 600;
+
+    letter-spacing:
+        .2em;
+
+    color:
+        #dedede;
+
+    text-shadow:
+
+        0 0 8px
+        rgba(255,255,255,.15),
+
+        0 0 40px
+        rgba(0,0,0,1);
+
+    animation:
+        textGlitch 8s infinite;
+}
+
+
+@keyframes textGlitch {
+
+    0%,88%,100% {
+
+        transform: translate(0);
+
+        opacity: 1;
+    }
+
+    89% {
+
+        transform:
+            translate(-3px,1px);
+
+        opacity: .7;
+    }
+
+    90% {
+
+        transform:
+            translate(4px,-1px);
+
+        opacity: .9;
+    }
+
+    91% {
+
+        transform:
+            translate(0);
+
+        opacity: 1;
+    }
+
+}
+
+
+.database-title {
+
+    margin-top: 15px;
+
+    font-family:
+        "Rajdhani",
+        sans-serif;
+
+    font-size:
+        clamp(25px,4vw,50px);
+
+    letter-spacing:
+        .3em;
+
+    color:
+        #65777b;
+}
+
+
+.connection {
+
+    margin: 35px 0;
+
+    color:
+        #719278;
+
+    font-size:
+        11px;
+
+    letter-spacing:
+        5px;
+
+    animation:
+        connectionBlink 3s infinite;
+}
+
+
+@keyframes connectionBlink {
+
+    0%,40%,44%,100% {
+        opacity: 1;
+    }
+
+    42% {
+        opacity: .1;
+    }
+
+    70% {
+        opacity: .7;
+    }
+
+    72% {
+        opacity: .05;
+    }
+
+    74% {
+        opacity: 1;
+    }
+
+}
+
+
+.access-warning {
+
+    margin:
+        60px 0 35px;
+
+    color:
+        #9b9b9b;
+
+    font-size:
+        16px;
+
+    line-height:
+        2;
+
+    letter-spacing:
+        5px;
+}
+
+
+.access-warning span {
+
+    display: block;
+
+    color:
+        #bcbcbc;
+
+    animation:
+        warningFlicker 5s infinite;
+}
+
+
+@keyframes warningFlicker {
+
+    0%,90%,100% {
+        opacity: 1;
+    }
+
+    92% {
+        opacity: .2;
+    }
+
+    94% {
+        opacity: 1;
+    }
+
+}
+
+
+/* =====================================================
+   BOTÃO
+===================================================== */
+
+.enter-button {
+
+    position: relative;
+
+    padding:
+        18px 45px;
+
+    border:
+        1px solid #526970;
+
+    background:
+        rgba(3,5,6,.75);
+
+    color:
+        #bfc8ca;
+
+    font-family:
+        "IBM Plex Mono",
+        monospace;
+
+    font-size:
+        11px;
+
+    letter-spacing:
+        4px;
+
+    overflow: hidden;
+
+    transition:
+        .4s;
+}
+
+
+.enter-button::before {
+
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+
+    left: -100%;
+
+    width: 100%;
+
+    height: 100%;
+
+    background:
+
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.15),
+            transparent
+        );
+
+    transition:
+        .7s;
+}
+
+
+.enter-button:hover::before {
+    left: 100%;
+}
+
+
+.enter-button:hover {
+
+    border-color:
+        #aab7ba;
+
+    color:
+        white;
+
+    box-shadow:
+        0 0 30px
+        rgba(120,140,145,.15);
+
+    transform:
+        scale(1.03);
+}
+
+
+.enter-button.warning-state {
+
+    border-color:
+        #8f1616;
+
+    color:
+        #d00000;
+
+    background:
+        rgba(40,0,0,.4);
+
+    animation:
+        dangerousGlitch .15s infinite;
+}
+
+
+@keyframes dangerousGlitch {
+
+    0% {
+        transform: translate(0);
+    }
+
+    25% {
+        transform: translate(-3px,1px);
+    }
+
+    50% {
+        transform: translate(2px,-2px);
+    }
+
+    75% {
+        transform: translate(3px,1px);
+    }
+
+    100% {
+        transform: translate(0);
+    }
+
+}
+
+
+/* =====================================================
+   BANCO DE DADOS
+===================================================== */
+
+.database {
+
+    position: relative;
+
+    min-height: 100vh;
+
+    padding:
+        120px 8%;
+
+    background:
+
+        radial-gradient(
+            circle at center,
+            #111719 0%,
+            #06090a 45%,
+            #020303 100%
+        );
+
+    overflow: hidden;
+
+    filter:
+        contrast(1.02);
+}
+
+
+.database::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    right: 0;
+
+    top: 32%;
+
+    height: 2px;
+
+    background:
+        rgba(255,255,255,.08);
+
+    box-shadow:
+
+        0 0 12px
+        rgba(255,255,255,.05),
+
+        0 80px 0
+        rgba(255,255,255,.025),
+
+        0 160px 0
+        rgba(255,255,255,.025);
+
+    pointer-events: none;
+
+    animation:
+        vhsTracking 7s steps(1) infinite;
+}
+
+
+@keyframes vhsTracking {
+
+    0%,85% {
+
+        transform:
+            translateY(0);
+
+        opacity: 0;
+    }
+
+    86% {
+
+        transform:
+            translateY(-100px);
+
+        opacity: 1;
+    }
+
+    87% {
+
+        transform:
+            translateY(180px);
+
+        opacity: .5;
+    }
+
+    88% {
+
+        transform:
+            translateY(40px);
+
+        opacity: .8;
+    }
+
+    89%,100% {
+
+        transform:
+            translateY(0);
+
+        opacity: 0;
+    }
+
+}
+
+
+/* =====================================================
+   CABEÇALHO
+===================================================== */
+
+.database-header {
+
+    position: relative;
+
+    max-width: 1000px;
+
+    margin:
+        auto auto 70px;
+
+    text-align:
+        center;
+}
+
+
+.terminal-text {
+
+    display: block;
+
+    margin-bottom:
+        20px;
+
+    color:
+        #657173;
+
+    font-size:
+        11px;
+
+    letter-spacing:
+        4px;
+}
+
+
+.database-header h1 {
+
+    margin: 0;
+
+    font-family:
+        "Rajdhani",
+        sans-serif;
+
+    font-size:
+        clamp(45px,7vw,90px);
+
+    letter-spacing:
+        8px;
+
+    color:
+        #e5e5e5;
+
+    text-shadow:
+        0 0 10px
+        rgba(255,255,255,.15);
+}
+
+
+.database-header p {
+
+    color:
+        #686f70;
+
+    margin-top:
+        15px;
+
+    font-size:
+        11px;
+}
+
+
+.divider {
+
+    width: 100%;
+
+    height: 1px;
+
+    margin:
+        30px 0;
+
+    background:
+        #293033;
+
+    opacity: .6;
+}
+
+
+/* =====================================================
+   SURVIVAL PROTOCOLS
+===================================================== */
+
+.survival-protocols {
+
+    max-width:
+        1000px;
+
+    margin:
+        0 auto 80px;
+
+    padding:
+        35px 40px;
+
+    border:
+        1px solid #293033;
+
+    background:
+        rgba(5,8,9,.75);
+
+    position:
+        relative;
+
+    overflow:
+        hidden;
+
+    box-shadow:
+        inset 0 0 50px
+        rgba(0,0,0,.5);
+}
+
+
+.protocol-title {
+
+    text-align:
+        center;
+
+    color:
+        #aeb6b7;
+
+    font-family:
+        "Rajdhani",
+        sans-serif;
+
+    font-size:
+        26px;
+
+    letter-spacing:
+        6px;
+
+    margin:
+        10px 0 25px;
+
+    text-shadow:
+        0 0 12px
+        rgba(255,255,255,.08);
+}
+
+
+.protocol-line {
+
+    color:
+        #293437;
+
+    font-size:
+        10px;
+
+    white-space:
+        nowrap;
+
+    overflow:
+        hidden;
+
+    margin:
+        15px 0;
+}
+
+
+.protocol-list {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:
+        12px 50px;
+
+    padding:
+        15px 0 25px;
+}
+
+
+.protocol-list div {
+
+    color:
+        #737d7f;
+
+    font-size:
+        11px;
+
+    letter-spacing:
+        2px;
+
+    padding:
+        8px 0;
+
+    border-bottom:
+        1px solid
+        rgba(41,48,51,.5);
+
+    transition:
+        .3s;
+}
+
+
+.protocol-list div:hover {
+
+    color:
+        #d0d0d0;
+
+    padding-left:
+        8px;
+
+    text-shadow:
+        0 0 10px
+        rgba(255,255,255,.1);
+}
+
+
+.protocol-list span {
+
+    color:
+        #526970;
+
+    margin-right:
+        12px;
+}
+
+
+/* =====================================================
+   WARNING
+===================================================== */
+
+.protocol-warning {
+
+    margin-top:
+        25px;
+
+    padding:
+        25px;
+
+    border:
+        1px solid #4b2020;
+
+    background:
+        rgba(25,4,4,.35);
+
+    text-align:
+        center;
+
+    position:
+        relative;
+}
+
+
+.protocol-warning::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    left:
+        0;
+
+    top:
+        0;
+
+    width:
+        3px;
+
+    height:
+        100%;
+
+    background:
+        #8f1616;
+
+    box-shadow:
+        0 0 15px
+        rgba(143,22,22,.5);
+}
+
+
+.warning-title {
+
+    color:
+        #9d3c3c;
+
+    font-size:
+        11px;
+
+    letter-spacing:
+        5px;
+
+    margin-bottom:
+        18px;
+
+    animation:
+        warningPulse 4s infinite;
+}
+
+
+.warning-text {
+
+    color:
+        #9b8585;
+
+    font-size:
+        12px;
+
+    letter-spacing:
+        4px;
+
+    text-shadow:
+        0 0 10px
+        rgba(143,22,22,.2);
+}
+
+
+@keyframes warningPulse {
+
+    0%,85%,100% {
+        opacity: 1;
+    }
+
+    88% {
+        opacity: .2;
+    }
+
+    91% {
+        opacity: 1;
+    }
+
+}
+
+
+/* =====================================================
+   PESQUISA
+===================================================== */
+
+.search-container {
+
+    max-width:
+        1000px;
+
+    margin:
+        0 auto 25px;
+}
+
+
+.search-label {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    margin-bottom:
+        8px;
+
+    font-size:
+        10px;
+
+    letter-spacing:
+        2px;
+
+    color:
+        #626b6c;
+}
+
+
+.status {
+    color:
+        #719278;
+}
+
+
+.search-box {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    height:
+        60px;
+
+    border:
+        1px solid #293335;
+
+    background:
+        #070b0c;
+
+    transition:
+        .3s;
+}
+
+
+.search-box:focus-within {
+
+    border-color:
+        #667174;
+
+    box-shadow:
+        0 0 25px
+        rgba(120,140,145,.08);
+}
+
+
+.search-symbol {
+
+    padding-left:
+        20px;
+
+    color:
+        #707b7d;
+
+    font-size:
+        20px;
+}
+
+
+.search-box input {
+
+    flex: 1;
+
+    height:
+        100%;
+
+    padding:
+        0 15px;
+
+    border:
+        none;
+
+    outline:
+        none;
+
+    background:
+        transparent;
+
+    color:
+        #dcdcdc;
+
+    font-family:
+        "IBM Plex Mono",
+        monospace;
+
+    font-size:
+        14px;
+}
+
+
+.search-box input::placeholder {
+    color:
+        #3e4648;
+}
+
+
+.search-box button {
+
+    height:
+        100%;
+
+    padding:
+        0 30px;
+
+    border:
+        none;
+
+    border-left:
+        1px solid #293335;
+
+    background:
+        #101718;
+
+    color:
+        #aeb5b6;
+
+    font-family:
+        "IBM Plex Mono",
+        monospace;
+
+    transition:
+        .3s;
+}
+
+
+.search-box button:hover {
+
+    background:
+        #20292b;
+
+    color:
+        white;
+}
+
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+.database-status {
+
+    max-width:
+        1000px;
+
+    margin:
+        0 auto 35px;
+
+    font-size:
+        10px;
+
+    color:
+        #4f595b;
+
+    letter-spacing:
+        2px;
+}
+
+
+/* =====================================================
+   GRID
+===================================================== */
+
+.scp-grid {
+
+    max-width:
+        1100px;
+
+    margin:
+        auto;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:
+        25px;
+}
+
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.scp-card {
+
+    position:
+        relative;
+
+    background:
+        #080c0d;
+
+    border:
+        1px solid #202729;
+
+    overflow:
+        hidden;
+
+    transition:
+        transform .4s,
+        border .4s,
+        box-shadow .4s;
+}
+
+
+.scp-card:hover {
+
+    transform:
+        translateY(-8px);
+
+    border-color:
+        #566063;
+
+    box-shadow:
+        0 15px 50px
+        rgba(0,0,0,.7);
+}
+
+
+.scp-image {
+
+    position:
+        relative;
+
+    height:
+        330px;
+
+    overflow:
+        hidden;
+}
+
+
+.scp-image img {
+
+    width:
+        100%;
+
+    height:
+        100%;
+
+    object-fit:
+        cover;
+
+    filter:
+        grayscale(100%)
+        contrast(1.3)
+        brightness(.48);
+
+    transition:
+        transform .7s,
+        filter .7s;
+
+    animation:
+        vhsImage 8s steps(1) infinite;
+}
+
+
+@keyframes vhsImage {
+
+    0%,92%,100% {
+
+        transform:
+            scale(1);
+    }
+
+    93% {
+
+        transform:
+            translateX(-3px)
+            scale(1.01);
+    }
+
+    94% {
+
+        transform:
+            translateX(4px)
+            scale(1.01);
+    }
+
+    95% {
+
+        transform:
+            translateX(0)
+            scale(1);
+    }
+}
+
+
+.scp-card:hover
+.scp-image img {
+
+    transform:
+        scale(1.08);
+
+    filter:
+        grayscale(100%)
+        contrast(1.5)
+        brightness(.32);
+}
+
+
+.scp-image::after {
+
+    content:
+        "REC • FOUNDATION SURVEILLANCE";
+
+    position:
+        absolute;
+
+    top:
+        12px;
+
+    left:
+        12px;
+
+    padding:
+        4px 7px;
+
+    background:
+        rgba(0,0,0,.7);
+
+    color:
+        #697577;
+
+    font-size:
+        8px;
+
+    letter-spacing:
+        1px;
+
+    z-index:
+        3;
+}
+
+
+.scp-image::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    z-index:
+        2;
+
+    pointer-events:
+        none;
+
+    background:
+
+        repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 5px,
+            rgba(255,255,255,.025) 6px
+        );
+}
+
+
+.image-overlay {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    z-index:
+        2;
+
+    background:
+
+        linear-gradient(
+            to top,
+            #080c0d 0%,
+            transparent 65%
+        );
+}
+
+
+.scp-number {
+
+    position:
+        absolute;
+
+    left:
+        20px;
+
+    bottom:
+        20px;
+
+    z-index:
+        4;
+
+    font-size:
+        13px;
+
+    letter-spacing:
+        3px;
+
+    color:
+        #d0d0d0;
+}
+
+
+/* =====================================================
+   INFORMAÇÕES
+===================================================== */
+
+.scp-info {
+
+    padding:
+        25px;
+}
+
+
+.scp-class {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    margin-bottom:
+        15px;
+
+    font-size:
+        9px;
+
+    letter-spacing:
+        1px;
+
+    color:
+        #596365;
+}
+
+
+.scp-class strong {
+    color:
+        #90999a;
+}
+
+
+.scp-info h2 {
+
+    margin:
+        0 0 12px;
+
+    font-family:
+        "Rajdhani",
+        sans-serif;
+
+    font-size:
+        27px;
+
+    letter-spacing:
+        3px;
+}
+
+
+.scp-info p {
+
+    min-height:
+        70px;
+
+    margin-bottom:
+        25px;
+
+    color:
+        #646d6f;
+
+    font-size:
+        11px;
+
+    line-height:
+        1.7;
+}
+
+
+.access-button {
+
+    width:
+        100%;
+
+    padding:
+        14px;
+
+    border:
+        1px solid #30393b;
+
+    background:
+        transparent;
+
+    color:
+        #969e9f;
+
+    font-family:
+        "IBM Plex Mono",
+        monospace;
+
+    font-size:
+        10px;
+
+    letter-spacing:
+        2px;
+
+    transition:
+        .3s;
+}
+
+
+.access-button:hover {
+
+    background:
+        #d8d8d8;
+
+    color:
+        #050606;
+
+    border-color:
+        white;
+}
+
+
+/* =====================================================
+   SEM RESULTADOS
+===================================================== */
+
+.no-results {
+
+    display:
+        none;
+
+    max-width:
+        700px;
+
+    margin:
+        80px auto;
+
+    padding:
+        50px;
+
+    text-align:
+        center;
+
+    border:
+        1px solid #461919;
+
+}
